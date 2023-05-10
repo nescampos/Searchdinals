@@ -1,0 +1,67 @@
+﻿@model Searchdinals.Models.SearchViewModel
+@{
+    ViewData["Title"] = "Search Ordinals by text";
+}
+
+<h2>Search Ordinals by text</h2>
+
+
+@using(Html.BeginForm(null,null,FormMethod.Get))
+{
+    @Html.Label("text","Enter the text to search")
+    @Html.TextBox("text",Model.Text,new {@class="form-control", placeholder="satoshi, bitcoin, etc."}) <br />
+
+    <input type="submit" value="Search" class="btn btn-primary loadingButton" />
+}
+
+
+@if(Model.Result != null && Model.Result.results != null && Model.Result.results.Any())
+{
+
+    <div class="alert alert-success">
+        Quantity of ordinals with the text @Model.Text : @Model.Result.results.Count()
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Block height</th>
+                <th>Inscription Id</th>
+                <th>Inscription Number</th>
+                
+                <th>Lenght (bytes)</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ordinal in Model.Result.results)
+            {
+                <tr>
+                    <td><a href="https://btcscan.org/tx/@ordinal.txid" target="_blank">@ordinal.createdat.ToString()</a></td>
+                    <td>@ordinal.blockheight</td>
+                    <td>@ordinal.inscriptionid</td>
+                    <td>@ordinal.inscriptionnumber</td>
+                    <td>@ordinal.contentlength</td>
+                    <td>@ordinal.contentstr
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    if(Model.Text != null)
+    {
+        <div class="alert alert-warning">
+            There are no coincidences with this text: @Model.Text
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Please, enter the text to search.
+        </div>
+    }
+}

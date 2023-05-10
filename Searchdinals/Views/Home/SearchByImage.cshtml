@@ -1,0 +1,67 @@
+﻿@model Searchdinals.Models.SearchViewModel
+@{
+    ViewData["Title"] = "Search Ordinals by image";
+}
+
+<h2>Search Ordinals by image</h2>
+
+
+@using(Html.BeginForm(null,null,FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Label("file","Select the file to search")
+    <input type="file" name="file" accept="image/png, image/jpeg" /> <br />
+
+    <input type="submit" value="Search" class="btn btn-primary loadingButton" />
+}
+
+
+@if(Model.Result != null && Model.Result.results != null && Model.Result.results.Any())
+{
+
+    <div class="alert alert-success">
+        Quantity of ordinals with similar content : @Model.Result.results.Count()
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Block height</th>
+                <th>Inscription Id</th>
+                <th>Inscription Number</th>
+                
+                <th>Lenght (bytes)</th>
+                <th>Content Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ordinal in Model.Result.results)
+            {
+                <tr>
+                    <td><a href="https://btcscan.org/tx/@ordinal.txid" target="_blank">@ordinal.createdat.ToString()</a></td>
+                    <td>@ordinal.blockheight</td>
+                    <td>@ordinal.inscriptionid</td>
+                    <td>@ordinal.inscriptionnumber</td>
+                    <td>@ordinal.contentlength</td>
+                    <td>@ordinal.contenttypestr
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    if(Model.Text != null)
+    {
+        <div class="alert alert-warning">
+            There are no coincidences with the file selected
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Please, select the image to search
+        </div>
+    }
+}

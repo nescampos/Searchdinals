@@ -1,0 +1,36 @@
+﻿﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<br /><br />
+<div class="row">
+    <div class="col-md-4 col-lg-4 col-sm-4">
+        <img src="@Url.Content("~/images/default.png")" alt="Searchdinals" class="img-responsive" style="height:150px;" />
+    </div>
+    <div class="col-md-7 col-lg-7 col-sm-7">
+        <div class="jumbotron">
+            <h1>Searchdinals</h1>
+
+            <p class="lead text-justify">
+                <b>Searchdinals</b> is an ordinal search engine on the network, based on text or images. <br />
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Search by text</h2>
+        <p>
+            Find ordinals containing some specific text.
+        </p>
+        <p><a class="btn btn-primary" href="@Url.Action("SearchByText","Home")">Search by text</a></p>
+    </div>
+    <div class="col-md-6">
+        <h2>Search by image</h2>
+        <p>Find ordinals based on the content of an image. The search engine will see if there are ordinals with the same content.</p>
+        <p><a class="btn btn-success" href="@Url.Action("SearchByImage","Home")">Search by image</a></p>
+    </div>
+    
+</div>
+<br /><br />
