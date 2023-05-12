@@ -2,7 +2,7 @@
 
 Searchdinals is a web app to work as a web search engine for Ordinals (Bitcoin), using .NET Core Framework.
 
-** Searchdinals use the [OrdinalsBot API](https://docs.ordinalsbot.com/), which is with problems in this moment.**
+**Searchdinals use the [OrdinalsBot API](https://docs.ordinalsbot.com/), which is with problems in this moment.**
 
 ## License
 ----
